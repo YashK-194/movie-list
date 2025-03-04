@@ -14,6 +14,7 @@ import {
 import fetchMovies from "../app/components/fetchMovies";
 import Modal from "../app/components/Modal";
 import SignInModal from "../app/components/SignInModal";
+import MovieDetailsPopup from "../app/components/MovieDetailsPopup";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 
 export default function MoviesPage() {
@@ -26,6 +27,16 @@ export default function MoviesPage() {
   const [forceRefresh, setForceRefresh] = useState(0);
   const [isSignInOpen, setIsSignInOpen] = useState(false);
   const [user, setUser] = useState(null); // Track user state
+
+  // New state for movie details popup
+  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+
+  // Add this function to handle movie selection
+  const handleMovieClick = (movie) => {
+    setSelectedMovie(movie);
+    setIsDetailsOpen(true);
+  };
 
   const fetchMovieCount = async () => {
     try {
@@ -158,7 +169,7 @@ export default function MoviesPage() {
 
       {/* Add Movie & Sign In Buttons at Top Left & Right */}
       {user?.email === "yashkm194@gmail.com" && (
-        <div className="absolute top-4 left-4 z-50">
+        <div className="absolute top-4 left-4 z-10">
           <button
             onClick={() => setIsModalOpen(true)}
             className="bg-blue-600 text-white px-5 py-2 rounded-lg shadow-lg hover:bg-blue-700 transition-all flex items-center relative opacity-80"
@@ -169,7 +180,7 @@ export default function MoviesPage() {
       )}
 
       {/* Sign In / Logout Button */}
-      <div className="absolute top-4 right-4 z-50">
+      <div className="absolute top-4 right-4 z-10">
         {user ? (
           <button
             onClick={handleSignOut}
@@ -238,11 +249,15 @@ export default function MoviesPage() {
               {filteredMovies.map((movie) => (
                 <li
                   key={movie.id}
-                  className="p-3 hover:bg-gray-200 transition-all text-lg font-semibold text-gray-900 flex justify-between items-center relative"
+                  className="p-3 hover:bg-gray-200 transition-all text-base font-semibold text-gray-900 flex justify-between items-center relative cursor-pointer"
+                  onClick={() => handleMovieClick(movie)}
                 >
                   <span>‣ {movie.name}</span>
-                  <div className="flex items-center">
-                    <span className="text-sm text-gray-500 mr-2">
+                  <div
+                    className="flex items-center space-x-4"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <span className="text-xs text-gray-500 mr-2">
                       {formatDate(movie.createdAt)}
                     </span>
                     {user?.email === "yashkm194@gmail.com" && (
@@ -265,6 +280,17 @@ export default function MoviesPage() {
             }}
           />
         </Modal>
+
+        {/* Movie Details Popup */}
+        <MovieDetailsPopup
+          movieName={selectedMovie?.name || ""}
+          movieYear={selectedMovie?.year || ""}
+          isOpen={isDetailsOpen}
+          onClose={() => {
+            setIsDetailsOpen(false);
+            setSelectedMovie(null);
+          }}
+        />
       </div>
     </div>
   );
@@ -318,3 +344,40 @@ function MovieOptions({ onDelete }) {
     </div>
   );
 }
+
+
+
+// Services: {
+//   [serviceId]:{
+//     description: "STRING",
+//     location:{
+//       address:"STRING",
+//       latitude:NUMBER,
+//       longitude:NUMBER
+//       timestamp:"STRING",
+//     },
+//     price:{
+//       max:"STRING",
+//       min:"STRING",
+//     },
+//     timestamp:"STRING",
+//     title:"STRING",
+//     userId:"STRING"
+//   }
+
+// }
+
+// Users:{
+//   [userId]:{
+//     email:"STRING",
+//     location:{
+//       address:"STRING",
+//       latitude:NUMBER,
+//       longitude:NUMBER
+//       timestamp:"STRING",
+//     },
+//     name:"STRING",
+//     phone:"STRING",
+//     services:ARRAY_OF_STRING
+//   }
+// }
