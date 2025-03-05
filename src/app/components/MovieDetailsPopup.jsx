@@ -50,7 +50,7 @@ export default function MovieDetailsPopup({ movieName, movieYear, isOpen, onClos
   return (
     <div className="fixed inset-0 bg-opacity-60 backdrop-blur-sm z-50 flex justify-center items-center p-4">
       <div className="bg-white rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="sticky top-0 bg-gray-100 p-4 border-b flex justify-between items-center">
+        <div className="sticky top-0 bg-gray-200 p-4 border-b flex justify-between items-center">
           <h2 className="text-2xl font-bold text-gray-900">Movie Details</h2>
           <button
             onClick={onClose}
@@ -97,7 +97,7 @@ export default function MovieDetailsPopup({ movieName, movieYear, isOpen, onClos
                 
                 <div className="mb-4 flex flex-wrap gap-2">
                   {movieDetails.Genre?.split(", ").map((genre) => (
-                    <span key={genre} className="bg-blue-100 text-blue-900 px-2.5 py-1 rounded-md text-sm font-medium">
+                    <span key={genre} className="bg-red-100 text-blue-900 px-2.5 py-1 rounded-md text-sm font-medium">
                       {genre}
                     </span>
                   ))}
@@ -105,37 +105,37 @@ export default function MovieDetailsPopup({ movieName, movieYear, isOpen, onClos
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 text-gray-800">
                   {movieDetails.imdbRating && (
-                    <div className="bg-gray-100 p-2.5 rounded">
+                    <div className="bg-gray-200 p-2.5 rounded">
                       <span className="font-bold text-gray-900 mr-2">IMDB Rating:</span> 
                       <span className="text-blue-800 font-semibold">{movieDetails.imdbRating}/10</span>
                     </div>
                   )}
                   {movieDetails.Runtime && (
-                    <div className="bg-gray-100 p-2.5 rounded">
+                    <div className="bg-gray-200 p-2.5 rounded">
                       <span className="font-bold text-gray-900 mr-2">Runtime:</span> {movieDetails.Runtime}
                     </div>
                   )}
                   {movieDetails.Director && movieDetails.Director !== "N/A" && (
-                    <div className="bg-gray-100 p-2.5 rounded">
+                    <div className="bg-gray-200 p-2.5 rounded">
                       <span className="font-bold text-gray-900 mr-2">Director:</span> {movieDetails.Director}
                     </div>
                   )}
                   {movieDetails.Actors && (
-                    <div className="bg-gray-100 p-2.5 rounded">
+                    <div className="bg-gray-200 p-2.5 rounded">
                       <span className="font-bold text-gray-900 mr-2">Actors:</span> {movieDetails.Actors}
                     </div>
                   )}
                 </div>
                 
                 {movieDetails.Plot && movieDetails.Plot !== "N/A" && (
-                  <div className="mb-4 bg-gray-50 p-4 rounded-lg">
+                  <div className="mb-4 bg-blue-100 p-4 rounded-lg">
                     <h4 className="font-bold text-gray-900 text-lg mb-2">Plot</h4>
                     <p className="text-gray-800 leading-relaxed">{movieDetails.Plot}</p>
                   </div>
                 )}
                 
                 {movieDetails.Awards && movieDetails.Awards !== "N/A" && (
-                  <div className="bg-gray-50 p-4 rounded-lg">
+                  <div className="bg-blue-100 p-4 rounded-lg">
                     <h4 className="font-bold text-gray-900 text-lg mb-2">Awards</h4>
                     <p className="text-gray-800">{movieDetails.Awards}</p>
                   </div>
