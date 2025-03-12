@@ -77,10 +77,10 @@ Make sure you have the following installed on your machine:
 
 ## Screenshots
 
-    ![Screenshot_1](screenshots/Screenshot_1.png)
-    ![Screenshot_2](screenshots/Screenshot_2.png)
-    ![Screenshot_3](screenshots/Screenshot_3.png)
-    ![Screenshot_4](screenshots/Screenshot_4.png)
+![Screenshot_1](screenshots/Screenshot_1.png)
+![Screenshot_2](screenshots/Screenshot_2.png)
+![Screenshot_3](screenshots/Screenshot_3.png)
+![Screenshot_4](screenshots/Screenshot_4.png)
 
 ## Contribution
 
